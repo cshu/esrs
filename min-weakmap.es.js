@@ -4,8 +4,7 @@
 //does not check Object(k)===k
 //if key is still alive after weakmap's lifetime ends, then there is leak
 
-//debug change !== to ===
-if(typeof WeakMap!=='undefined'){
+if(typeof WeakMap==='undefined'){
 	let count=0;
 	var WeakMap=function(){this.wmid='min_weakmap_pf_property_id'+count;++count;};
 	WeakMap.prototype.delete=function(k){
