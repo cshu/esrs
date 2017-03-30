@@ -1,8 +1,13 @@
 
-function noop(){}//usually you may write function(){} instead
+function noop(){}//usually you may write ()=>{} instead
+function retarg1(arg1){return arg1;}
 
 function removeFromParentNode(n){
 	return n.parentNode.removeChild(n);
+}
+function removeItAndPreviousSiblings(n){
+	while(n.previousSibling) removeFromParentNode(n.previousSibling);
+	removeFromParentNode(n);
 }
 
 function firstSelectedOptionIn(sel){
@@ -14,13 +19,32 @@ function ctorToString(obj){
 	return obj.constructor.toString();
 }
 
-function strictEqCmpList(x,y,s){
+function strictCmpList(x,y,s){
 	while(s>0){
 		s--;
 		if(x[s]!==y[s])
 			return true;
 	}
 	return false;
+}
+function safeStrictCmpList(x,y){
+	var s=x.length;
+	if(s!==y.length)return true;
+	else return strictCmpList(x,y,s);
+}
+
+function getUint32LEFromBuffer(t,off){
+	return new DataView(t.buffer,t.byteOffset+off,4).getUint32(0,true);
+}
+
+function newDataViewSetUint32le(u){
+	var tbr=new DataView(new ArrayBuffer(4));
+	tbr.setUint32(0,u,true);
+	return tbr;
+}
+function blobStrWithLenLE(s){
+	var blobstr=new Blob([s]);//optimize textencoder is faster?
+	return new Blob([newDataViewSetUint32le(blobstr.size),blobstr]);
 }
 
 function indexOfLastNotEq(obj,searchElement,fromIndex=obj.length-1){
@@ -63,3 +87,4 @@ function cmpStr(x,y){
 	return x>y ? 1 : (x<y ? -1 : 0);
 }
 
+function arg1PreventDefaultStopPropagation(e){e.preventDefault();e.stopPropagation();}
