@@ -65,6 +65,14 @@ function insBeforeFirstChild(p,c){
 	p.insertBefore(c,p.firstChild);
 }
 
+//use this function as necessary. e.g. an issue: when you change focus in the event handler of keydown on firefox linux, the newly focused element can get another event immediately as well!
+function createTextInputPreventDefaultWhenEnterKeyDown(){
+	var tbr=document.createElement('input');
+	//tbr.type='text';//? spec defines default type as text, but omit this can cause incompatibility?
+	tbr.addEventListener('keydown',function(ke){if(ke.keyCode===0x0d)ke.preventDefault();});
+	return tbr;
+}
+
 function createAnchorWithPhHref(){
 	var tbr=document.createElement('a');
 	tbr.href='#';
