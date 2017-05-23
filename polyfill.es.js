@@ -33,7 +33,7 @@ void function(){
 	}
 	if(!String.prototype.startsWith){
 		String.prototype.startsWith=function(prefix,position=0){
-			return this.slice(off).lastIndexOf(prefix,0)!==-1;
+			return this.slice(position).lastIndexOf(prefix,0)!==-1;
 		};
 	}
 
