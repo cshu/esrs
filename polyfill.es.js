@@ -27,8 +27,13 @@ if(typeof MutationObserver==='undefined'){
 void function(){
 
 	if(!String.prototype.endsWith){
-		String.prototype.endsWith=function(suffix){
+		String.prototype.endsWith=function(suffix){//fixme
 			return this.indexOf(suffix,this.length-suffix.length)!==-1;
+		};
+	}
+	if(!String.prototype.startsWith){
+		String.prototype.startsWith=function(prefix,position=0){
+			return this.slice(off).lastIndexOf(prefix,0)!==-1;
 		};
 	}
 
