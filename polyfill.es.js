@@ -27,8 +27,8 @@ if(typeof MutationObserver==='undefined'){
 void function(){
 
 	if(!String.prototype.endsWith){
-		String.prototype.endsWith=function(suffix){//fixme
-			return this.indexOf(suffix,this.length-suffix.length)!==-1;
+		String.prototype.endsWith=function(suffix,length=this.length){
+			return this.substring(0,length).indexOf(suffix,length-suffix.length)!==-1;
 		};
 	}
 	if(!String.prototype.startsWith){
