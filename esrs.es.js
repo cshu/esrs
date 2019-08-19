@@ -33,8 +33,16 @@ function safeStrictCmpList(x,y){
 	else return strictCmpList(x,y,s);
 }
 
-function getUint32LEFromBuffer(t,off){
-	return new DataView(t.buffer,t.byteOffset+off,4).getUint32(0,true);
+function getUint32LEFromBuffer(arraybufferview, off){
+	return new DataView(arraybufferview.buffer, arraybufferview.byteOffset+off, 4).getUint32(0, true);
+}
+function decodeLengthPrefixedStr(arraybufferview, off, textdec){
+	var len = getUint32LEFromBuffer(arraybufferview, off);
+	off += 4;
+	return {
+		str: textdec.decode(new DataView(arraybufferview.buffer, arraybufferview.byteOffset+off, len)),
+		new_offset: off+len
+	};//object destructuring
 }
 
 function newDataViewSetUint32le(u){
