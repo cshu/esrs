@@ -1,0 +1,7 @@
+{
+  "name": "esrs",
+  "version": "0.1.0",
+  "description": "Some reusable snippets",
+  "repository": "github:cshu/esrs",
+  "main": "esrs.es.js"
+}
